@@ -1,17 +1,46 @@
+import { graphql } from "gatsby"
 import * as React from "react"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import FPOvideo from "../images/fpo.mp4"
+import VimeoPlayer from "../components/vimeo-player"
+import NativeVideoPlayer from "../components/native-video-player"
+import * as styles from './homepage.module.css'
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <video controls autoPlay="true" playsInline muted>
-      <source src={FPOvideo} type="video/mp4" />
-    </video>
-  </Layout>
-)
+const IndexPage = ({ data }) => {
+  const vimeoSettings = data.site.siteMetadata.settings.vimeo
+  const useVimeo = vimeoSettings.enabled && vimeoSettings.url
+  const player = useVimeo ? (
+    <VimeoPlayer url={vimeoSettings.url} aspectRatio={vimeoSettings.aspectRatio} />
+) : (
+    <NativeVideoPlayer />
+  )
+  return (
+    <Layout>
+      <Seo title="Home" />
+      <h1 className="visually-hidden">{data.site.siteMetadata.title}</h1>
+      <div className={styles.page}>
+        { player }
+      </div>
+    </Layout>
+  )
+}
+
+export const pageQuery = graphql`
+  query Homepage {
+    site {
+      siteMetadata {
+        title
+        settings {
+          vimeo {
+            enabled
+            url
+            aspectRatio
+          }
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

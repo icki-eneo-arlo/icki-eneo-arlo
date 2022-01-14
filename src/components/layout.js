@@ -12,20 +12,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import '../styles/index.css'
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
   return (
     <>
-      <h1 className="visually-hidden">{data.site.siteMetadata.title}</h1>
-      <main>{children}</main>
+      {children}
     </>
   )
 }
