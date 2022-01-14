@@ -1,0 +1,26 @@
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+.skip-to-main-content {
+  display: none;
+}
+
+.skip-to-main-content:focus,
+.skip-to-main-content:focus-within {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6rem;
+  padding: 0.5rem;
+  background: var(--black);
+  color: var(--white);
+}
