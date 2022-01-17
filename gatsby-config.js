@@ -17,12 +17,12 @@ module.exports = {
         url: ""
       },
       video : {
-        width: 1280,
-        height: 720,
+        width: 3500,
+        height: 1945,
       },
       cropSafeRegion: {
-        width: 500,
-        height: 500
+        width: 1100,
+        height: 1100
       }
     },
   },

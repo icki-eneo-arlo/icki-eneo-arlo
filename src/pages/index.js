@@ -96,7 +96,7 @@ const IndexPage = ({ data }) => {
   const player = useVimeo ? (
     <VimeoPlayer url={vimeoSettings.url} />
   ) : (
-    <NativeVideoPlayer />
+    <NativeVideoPlayer scale={videoScale} />
   )
   return (
     <Layout>
