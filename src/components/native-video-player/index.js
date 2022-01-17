@@ -1,58 +1,119 @@
 import React, { useEffect, useRef, useState } from "react"
-import video512 from "../../images/20220117--crf-18--width-512.mp4"
-import video1024 from "../../images/20220117--crf-18--width-1024.mp4"
-import video2048 from "../../images/20220117--crf-21--width-2048.mp4"
-import video3840 from "../../images/20220117--original.mp4"
+import { getVideoScale } from "../../utilities"
+import { ScaledPlayer } from "../scaled-player"
+import portraitVideo from "../../images/portrait-orientation--width-750--vbr-1-pass--target-3mbps.mp4";
+import landscapeVideo1024 from "../../images/20220117--crf-18--width-1024.mp4"
+import landscapeVideo2048 from "../../images/20220117--crf-21--width-2048.mp4"
+import landscapeVideo3840 from "../../images/20220117--original.mp4"
 
-const NativeVideoPlayer = ({ scale }) => {
-  const video = useRef(null);
+const NativeVideoPlayer = () => {
+  const video = useRef(null)
   const [source, setSource] = useState(null)
+  const [scale, setScale] = useState(null)
+  const [aspectRatio, setAspectRatio] = useState(null)
 
   useEffect(() => {
     if (!video.current) {
-      return;
+      return
     }
 
-    const sourcesBySize = [
+    const sizes = [
       {
-        width: 512,
-        url: video512,
+        videoWidth: 600,
+        videoHeight: 900,
+        cropSafeWidth: 480,
+        cropSafeHeight: 500,
+        url: portraitVideo,
       },
       {
-        width: 1024,
-        url: video1024,
+        videoWidth: 1024,
+        videoHeight: 576,
+        cropSafeWidth: 500,
+        cropSafeHeight: 500,
+        url: landscapeVideo1024,
       },
       {
-        width: 2048,
-        url: video2048,
+        videoWidth: 2048,
+        videoHeight: 1152,
+        cropSafeWidth: 750,
+        cropSafeHeight: 900,
+        url: landscapeVideo2048,
       },
       {
-        width: 3840,
-        url: video3840,
+        videoWidth: 3840,
+        videoHeight: 2160,
+        cropSafeWidth: 1800,
+        cropSafeHeight: 2000,
+        url: landscapeVideo3840,
       },
     ]
-    const renderedAssetSize = scale * window.innerWidth
-    let sourceToUse = sourcesBySize.find(
-      source => source.width >= renderedAssetSize
-    )
-    if (!sourceToUse) {
-      sourceToUse = sourcesBySize[sourcesBySize.length - 1]
+
+    const getBestSize = () => {
+      const scales = sizes.map(size => (
+        getVideoScale(
+          size.videoWidth,
+          size.videoHeight,
+          size.cropSafeWidth,
+          size.cropSafeHeight,
+          window.innerWidth,
+          window.innerHeight
+        )
+      ));
+      let sizeIndex = scales.findIndex(s => s < 1.125);
+      if (sizeIndex < 0) {
+        sizeIndex = scales.findIndex(s => s < 1.25);
+      }
+      if (sizeIndex < 0) {
+        sizeIndex = scales.findIndex(s => s < 1.5);
+      }
+      if (sizeIndex < 0) {
+        sizeIndex = scales.findIndex(s => s < 2);
+      }
+      if (sizeIndex < 0) {
+        sizeIndex = sizes.length - 1;
+      }
+      const size = sizes[sizeIndex];
+      return size || sizes[sizes.length - 1]
     }
-    setSource(<source src={sourceToUse.url} type="video/mp4" />)
-    video.current.play();
-  }, [scale, video])
+
+    const getSourceElement = url => {
+      return <source src={url} type="video/mp4" />
+    }
+
+    const setVideoSize = () => {
+      const size = getBestSize()
+      setSource(getSourceElement(size.url))
+      setScale(
+        getVideoScale(
+          size.videoWidth,
+          size.videoHeight,
+          size.cropSafeWidth,
+          size.cropSafeHeight,
+          window.innerWidth,
+          window.innerHeight
+        )
+      )
+      setAspectRatio(size.videoWidth / size.videoHeight)
+    }
+
+    window.addEventListener("resize", setVideoSize)
+    setVideoSize()
+    return window.removeEventListener("resize", setVideoSize)
+  }, [])
 
   return (
-    <video
-      ref={video}
-      autoPlay={true}
-      playsInline
-      muted
-      loop
-      style={{ width: "100%", height: "100%" }}
-    >
-      {source}
-    </video>
+    <ScaledPlayer scale={scale} aspectRatio={aspectRatio}>
+      <video
+        ref={video}
+        autoPlay={true}
+        playsInline
+        muted
+        loop
+        style={{ width: "100%", height: "100%" }}
+      >
+        {source}
+      </video>
+    </ScaledPlayer>
   )
 }
 

@@ -4,26 +4,14 @@ module.exports = {
     description: `Description tk`,
     siteUrl: `https://ickieneoarlo.com/`,
     settings: {
-      // vimeo: {
-      //   enabled: true,
-      //   url: "https://vimeo.com/178646728"
-      // },
-      // video : {
-      //   width: 960,
-      //   height: 540,
-      // },
       vimeo: {
         enabled: false,
-        url: ""
+        url: "https://vimeo.com/178646728",
+        videoWidth: 960,
+        videoHeight: 540,
+        cropSafeWidth: 500,
+        cropSafeHeight: 500
       },
-      video : {
-        width: 3500,
-        height: 1945,
-      },
-      cropSafeRegion: {
-        width: 1100,
-        height: 1100
-      }
     },
   },
   plugins: [
