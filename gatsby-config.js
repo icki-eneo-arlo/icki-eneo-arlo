@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `icki eneo arlo`,
+    title: `Icki Eneo Arlo`,
     description: `Description tk`,
     siteUrl: `https://ickieneoarlo.com/`,
     settings: {
