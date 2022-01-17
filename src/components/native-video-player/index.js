@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
-import video512 from "../../images/compressed-crf28-512px.mp4"
-import video1024 from "../../images/compressed-crf28-1024px.mp4"
-import video2048 from "../../images/compressed-crf28-2048px.mp4"
-import video3800 from "../../images/compressed-crf28-3800px.mp4"
+import video512 from "../../images/20220117--crf-18--width-512.mp4"
+import video1024 from "../../images/20220117--crf-18--width-1024.mp4"
+import video2048 from "../../images/20220117--crf-21--width-2048.mp4"
+import video3840 from "../../images/20220117--original.mp4"
 
 const NativeVideoPlayer = ({ scale }) => {
   const video = useRef(null);
@@ -27,8 +27,8 @@ const NativeVideoPlayer = ({ scale }) => {
         url: video2048,
       },
       {
-        width: 3800,
-        url: video3800,
+        width: 3840,
+        url: video3840,
       },
     ]
     const renderedAssetSize = scale * window.innerWidth

@@ -45,7 +45,6 @@ const IndexPage = ({ data }) => {
 
       // Calculate what scale the video should be rendered at
       if (cropSafeWidth && cropSafeHeight) {
-        console.log("Finding a crop that doesn't sacrifice our region of interest:", cropSafeWidth, cropSafeHeight);
         let targetVideoScale = 1
         let maxScaleBeforeViolatingProtectedCropWidth = 1
         let maxScaleBeforeViolatingProtectedCropHeight = 1
