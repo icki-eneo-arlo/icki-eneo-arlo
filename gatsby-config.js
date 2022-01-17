@@ -4,10 +4,25 @@ module.exports = {
     description: `Description tk`,
     siteUrl: `https://ickieneoarlo.com/`,
     settings: {
+      // vimeo: {
+      //   enabled: true,
+      //   url: "https://vimeo.com/178646728"
+      // },
+      // video : {
+      //   width: 960,
+      //   height: 540,
+      // },
       vimeo: {
-        enabled: true,
-        url: "https://vimeo.com/178646728",
-        aspectRatio: "16:9"
+        enabled: false,
+        url: ""
+      },
+      video : {
+        width: 1280,
+        height: 720,
+      },
+      cropSafeRegion: {
+        width: 500,
+        height: 500
       }
     },
   },

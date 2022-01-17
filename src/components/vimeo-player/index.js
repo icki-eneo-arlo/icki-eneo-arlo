@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Vimeo from '@vimeo/player'
 import * as vimeoUtil from "../../utilities/vimeo";
+import * as styles from "./vimeo-player.module.css";
 
-const VimeoPlayer = ({ url, aspectRatio, ...otherProps }) => {
+const VimeoPlayer = ({ url, options }) => {
   // Default player options
   const defaultOptions = {
     background: true,
@@ -13,8 +14,8 @@ const VimeoPlayer = ({ url, aspectRatio, ...otherProps }) => {
   }
 
   // Merged options
-  const options = otherProps.options
-    ? Object.assign({}, defaultOptions, otherProps.options)
+  options = options
+    ? Object.sign({}, defaultOptions, options)
     : defaultOptions
 
   // Get the vimeo video ID
@@ -37,10 +38,10 @@ const VimeoPlayer = ({ url, aspectRatio, ...otherProps }) => {
     return () => {
       p.destroy()
     }
-  }, [element])
+  }, [element, options])
 
   return options.id ? (
-    <div ref={element} {...otherProps}></div>
+    <div ref={element} className={styles.player}></div>
   ) : (
     <></>
   )
