@@ -22,7 +22,7 @@ const IndexPage = ({ data }) => {
   )
   return (
     <Layout>
-      <Seo title="Home" />
+      <Seo />
       <h1 className="visually-hidden">{data.site.siteMetadata.title}</h1>
       <div className={styles.page}>
         <div style={{ height: "100%", overflow: "hidden" }}>
