@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { getVideoScale } from "../../utilities"
 import { ScaledPlayer } from "../scaled-player"
-import portraitVideo from "../../images/portrait-orientation--width-750--vbr-1-pass--target-3mbps.mp4";
+import portraitVideo from "../../images/portrait-orientation--width-750--vbr-1-pass--target-3mbps.mp4"
 import landscapeVideo1024 from "../../images/20220117--crf-18--width-1024.mp4"
 import landscapeVideo2048 from "../../images/20220117--crf-21--width-2048.mp4"
 import landscapeVideo3840 from "../../images/20220117--original.mp4"
@@ -11,6 +11,10 @@ const NativeVideoPlayer = () => {
   const [source, setSource] = useState(null)
   const [scale, setScale] = useState(null)
   const [aspectRatio, setAspectRatio] = useState(null)
+
+  const toggleMuteState = e => {
+    e.target.muted = !e.target.muted
+  }
 
   useEffect(() => {
     if (!video.current) {
@@ -49,13 +53,13 @@ const NativeVideoPlayer = () => {
     ]
 
     const getBestSize = () => {
-      let smallestAppropriateSize = sizes.find((size) => {
-        return window.innerWidth <= size.videoWidth;
-      });
+      let smallestAppropriateSize = sizes.find(size => {
+        return window.innerWidth <= size.videoWidth
+      })
       if (!smallestAppropriateSize) {
-        smallestAppropriateSize = sizes[sizes.length - 1];
+        smallestAppropriateSize = sizes[sizes.length - 1]
       }
-      return smallestAppropriateSize;
+      return smallestAppropriateSize
     }
 
     const getSourceElement = url => {
@@ -92,6 +96,7 @@ const NativeVideoPlayer = () => {
         muted
         loop
         style={{ width: "100%", height: "100%" }}
+        onClick={toggleMuteState}
       >
         {source}
       </video>
