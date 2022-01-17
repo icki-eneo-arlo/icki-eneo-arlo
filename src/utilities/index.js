@@ -31,3 +31,7 @@ export const getVideoScale = (
     return targetScale
   }
 }
+
+export const getNativeVideoScale = (videoWidth, viewportWidth, scale) => {
+  return (viewportWidth * scale) / videoWidth
+}

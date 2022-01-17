@@ -19,10 +19,10 @@ const NativeVideoPlayer = () => {
 
     const sizes = [
       {
-        videoWidth: 600,
-        videoHeight: 900,
-        cropSafeWidth: 480,
-        cropSafeHeight: 500,
+        videoWidth: 750,
+        videoHeight: 1334,
+        cropSafeWidth: 400,
+        cropSafeHeight: 800,
         url: portraitVideo,
       },
       {
@@ -49,31 +49,13 @@ const NativeVideoPlayer = () => {
     ]
 
     const getBestSize = () => {
-      const scales = sizes.map(size => (
-        getVideoScale(
-          size.videoWidth,
-          size.videoHeight,
-          size.cropSafeWidth,
-          size.cropSafeHeight,
-          window.innerWidth,
-          window.innerHeight
-        )
-      ));
-      let sizeIndex = scales.findIndex(s => s < 1.125);
-      if (sizeIndex < 0) {
-        sizeIndex = scales.findIndex(s => s < 1.25);
+      let smallestAppropriateSize = sizes.find((size) => {
+        return window.innerWidth <= size.videoWidth;
+      });
+      if (!smallestAppropriateSize) {
+        smallestAppropriateSize = sizes[sizes.length - 1];
       }
-      if (sizeIndex < 0) {
-        sizeIndex = scales.findIndex(s => s < 1.5);
-      }
-      if (sizeIndex < 0) {
-        sizeIndex = scales.findIndex(s => s < 2);
-      }
-      if (sizeIndex < 0) {
-        sizeIndex = sizes.length - 1;
-      }
-      const size = sizes[sizeIndex];
-      return size || sizes[sizes.length - 1]
+      return smallestAppropriateSize;
     }
 
     const getSourceElement = url => {
