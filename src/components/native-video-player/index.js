@@ -1,12 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import { getVideoScale } from "../../utilities"
 import { ScaledPlayer } from "../scaled-player"
-import portraitVideo from "../../images/portrait-orientation--width-750--vbr-1-pass--target-3mbps.mp4"
-import landscapeVideo1024 from "../../images/20220117--crf-18--width-1024.mp4"
-import landscapeVideo2048 from "../../images/20220117--crf-21--width-2048.mp4"
-import landscapeVideo3840 from "../../images/20220117--original.mp4"
 
-const NativeVideoPlayer = () => {
+const NativeVideoPlayer = ({ sizes }) => {
   const video = useRef(null)
   const [source, setSource] = useState(null)
   const [scale, setScale] = useState(null)
@@ -20,37 +16,6 @@ const NativeVideoPlayer = () => {
     if (!video.current) {
       return
     }
-
-    const sizes = [
-      {
-        videoWidth: 750,
-        videoHeight: 1334,
-        cropSafeWidth: 400,
-        cropSafeHeight: 800,
-        url: portraitVideo,
-      },
-      {
-        videoWidth: 1024,
-        videoHeight: 576,
-        cropSafeWidth: 500,
-        cropSafeHeight: 500,
-        url: landscapeVideo1024,
-      },
-      {
-        videoWidth: 2048,
-        videoHeight: 1152,
-        cropSafeWidth: 750,
-        cropSafeHeight: 900,
-        url: landscapeVideo2048,
-      },
-      {
-        videoWidth: 3840,
-        videoHeight: 2160,
-        cropSafeWidth: 1800,
-        cropSafeHeight: 2000,
-        url: landscapeVideo3840,
-      },
-    ]
 
     const getBestSize = () => {
       let smallestAppropriateSize = sizes.find(size => {
@@ -85,7 +50,7 @@ const NativeVideoPlayer = () => {
     window.addEventListener("resize", setVideoSize)
     setVideoSize()
     return window.removeEventListener("resize", setVideoSize)
-  }, [])
+  }, [sizes])
 
   return (
     <ScaledPlayer scale={scale} aspectRatio={aspectRatio}>
