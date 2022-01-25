@@ -2,8 +2,8 @@ input=$1
 prefix=$2
 # sizes=(512 1024 2048 3800)
 # crfs=(18 21 24 27)
-sizes=(3800)
-crfs=(24)
+sizes=(1024 2048 3840)
+crfs=(18)
 
 echo "AVOID RUNNING THIS SCRIPT SIMULTANEOUS TO GATSBY. Webpack will attempt to constantly load the asset as its being created."
 
