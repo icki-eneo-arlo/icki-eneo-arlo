@@ -12,6 +12,11 @@ const NativeVideoPlayer = ({ sizes }) => {
     e.target.muted = !e.target.muted
   }
 
+  const restartVideo = e => {
+    e.target.currentTime = 0;
+    e.target.play();
+  }
+
   useEffect(() => {
     if (!video.current) {
       return
@@ -59,9 +64,9 @@ const NativeVideoPlayer = ({ sizes }) => {
         autoPlay={true}
         playsInline
         muted
-        loop
         style={{ width: "100%", height: "100%" }}
         onClick={toggleMuteState}
+        onEnded={restartVideo}
       >
         {source}
       </video>
