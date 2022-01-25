@@ -3,16 +3,6 @@ module.exports = {
     title: `Icki Eneo Arlo`,
     description: `Description tk`,
     siteUrl: `https://ickieneoarlo.com/`,
-    settings: {
-      vimeo: {
-        enabled: false,
-        url: "https://vimeo.com/178646728",
-        videoWidth: 960,
-        videoHeight: 540,
-        cropSafeWidth: 500,
-        cropSafeHeight: 500
-      },
-    },
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

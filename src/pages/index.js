@@ -1,11 +1,10 @@
 import { graphql } from "gatsby"
 import React from "react"
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import VimeoPlayer from "../components/vimeo-player"
-import NativeVideoPlayer from "../components/native-video-player"
-import * as styles from "./homepage.module.css"
+import VideoPage from "../components/video-page";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
+import { NATIVE_VIDEO_TYPE } from "../utilities/constants"
 
 import portraitVideo from "../images/2022-01-24--portrait--crf-24--width-750.mp4"
 import landscapeVideo1024 from "../images/2022-01-24--landscape--crf-18--width-1024.mp4"
@@ -13,12 +12,6 @@ import landscapeVideo2048 from "../images/2022-01-24--landscape--crf-18--width-2
 import landscapeVideo3840 from "../images/2022-01-24--landscape--original.mp4"
 
 const IndexPage = ({ data }) => {
-  // Pull out and rename data from source
-  const {
-    vimeo: vimeoSettings,
-  } = data.site.siteMetadata.settings
-  const useVimeo = vimeoSettings.enabled && vimeoSettings.url
-
   // Manually draft some source data
   const sizes = [
     {
@@ -27,6 +20,7 @@ const IndexPage = ({ data }) => {
       cropSafeWidth: 400,
       cropSafeHeight: 800,
       url: portraitVideo,
+      type: NATIVE_VIDEO_TYPE
     },
     {
       videoWidth: 1024,
@@ -34,6 +28,7 @@ const IndexPage = ({ data }) => {
       cropSafeWidth: 500,
       cropSafeHeight: 500,
       url: landscapeVideo1024,
+      type: NATIVE_VIDEO_TYPE
     },
     {
       videoWidth: 2048,
@@ -41,6 +36,7 @@ const IndexPage = ({ data }) => {
       cropSafeWidth: 750,
       cropSafeHeight: 900,
       url: landscapeVideo2048,
+      type: NATIVE_VIDEO_TYPE
     },
     {
       videoWidth: 3840,
@@ -48,24 +44,15 @@ const IndexPage = ({ data }) => {
       cropSafeWidth: 1800,
       cropSafeHeight: 2000,
       url: landscapeVideo3840,
+      type: NATIVE_VIDEO_TYPE
     },
   ]
 
-  // On load (and whenever the browser resizes), calculate other derived properties
-  const player = useVimeo ? (
-    <VimeoPlayer {...vimeoSettings} />
-  ) : (
-    <NativeVideoPlayer sizes={sizes} />
-  )
   return (
     <Layout>
       <Seo />
       <h1 className="visually-hidden">{data.site.siteMetadata.title}</h1>
-      <div className={styles.page}>
-        <div style={{ height: "100%", overflow: "hidden" }}>
-          { player }
-        </div>
-      </div>
+      <VideoPage sizes={sizes} />
     </Layout>
   )
 }
@@ -75,16 +62,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-        settings {
-          vimeo {
-            enabled
-            url
-            videoWidth
-            videoHeight
-            cropSafeWidth
-            cropSafeHeight
-          }
-        }
       }
     }
   }

@@ -1,6 +1,6 @@
 import React from "react"
 
-export const ScaledPlayer = ({ scale, aspectRatio, children }) => (
+const ScaledPlayer = ({ scale, aspectRatio, children }) => (
   <div
     style={{
       width: `${scale * 100}%`,
@@ -31,3 +31,5 @@ export const ScaledPlayer = ({ scale, aspectRatio, children }) => (
     </div>
   </div>
 )
+
+export default ScaledPlayer
