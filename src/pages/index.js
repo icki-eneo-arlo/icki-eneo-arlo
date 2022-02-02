@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { VIMEO_VIDEO_TYPE } from "../utilities/constants"
 
-const MaxBitrate = ({ data }) => {
+const Homepage = ({ data }) => {
   // Manually draft some source data
   const sizes = [
     {
@@ -14,9 +14,17 @@ const MaxBitrate = ({ data }) => {
       videoHeight: 1334,
       cropSafeWidth: 400,
       cropSafeHeight: 800,
-      url: "https://vimeo.com/672803530",
+      url: "https://vimeo.com/672936187",
       type: VIMEO_VIDEO_TYPE
-    }
+    },
+    {
+      videoWidth: 1024,
+      videoHeight: 576,
+      cropSafeWidth: 500,
+      cropSafeHeight: 500,
+      url: "https://vimeo.com/669965690",
+      type: VIMEO_VIDEO_TYPE
+    },
   ]
 
   return (
@@ -29,7 +37,7 @@ const MaxBitrate = ({ data }) => {
 }
 
 export const pageQuery = graphql`
-  query MaxBitrate {
+  query Homepage {
     site {
       siteMetadata {
         title
@@ -38,4 +46,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default MaxBitrate
+export default Homepage
