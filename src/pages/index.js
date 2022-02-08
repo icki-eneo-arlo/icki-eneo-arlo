@@ -4,7 +4,7 @@ import React from "react"
 import VideoPage from "../components/video-page";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import { VIMEO_VIDEO_TYPE } from "../utilities/constants"
+import { VIMEO_VIDEO_TYPE, BY_VIEWPORT_ASPECT_RATIO } from "../utilities/constants"
 
 const Homepage = ({ data }) => {
   // Manually draft some source data
@@ -20,7 +20,7 @@ const Homepage = ({ data }) => {
     {
       videoWidth: 1024,
       videoHeight: 576,
-      cropSafeWidth: 1024,
+      cropSafeWidth: 576,
       cropSafeHeight: 576,
       url: "https://vimeo.com/674889802",
       type: VIMEO_VIDEO_TYPE
@@ -31,7 +31,7 @@ const Homepage = ({ data }) => {
     <Layout>
       <Seo />
       <h1 className="visually-hidden">{data.site.siteMetadata.title}</h1>
-      <VideoPage sizes={sizes} />
+      <VideoPage sizes={sizes} mode={BY_VIEWPORT_ASPECT_RATIO} />
     </Layout>
   )
 }
