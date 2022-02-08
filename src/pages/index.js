@@ -14,15 +14,15 @@ const Homepage = ({ data }) => {
       videoHeight: 1334,
       cropSafeWidth: 400,
       cropSafeHeight: 800,
-      url: "https://vimeo.com/672936187",
+      url: "https://vimeo.com/674889833",
       type: VIMEO_VIDEO_TYPE
     },
     {
       videoWidth: 1024,
       videoHeight: 576,
-      cropSafeWidth: 500,
-      cropSafeHeight: 500,
-      url: "https://vimeo.com/669965690",
+      cropSafeWidth: 1024,
+      cropSafeHeight: 576,
+      url: "https://vimeo.com/674889802",
       type: VIMEO_VIDEO_TYPE
     },
   ]
