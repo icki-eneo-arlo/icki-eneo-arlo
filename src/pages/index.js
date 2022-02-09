@@ -31,7 +31,7 @@ const Homepage = ({ data }) => {
     <Layout>
       <Seo />
       <h1 className="visually-hidden">{data.site.siteMetadata.title}</h1>
-      <VideoPage sizes={sizes} mode={BY_VIEWPORT_ASPECT_RATIO} />
+      <VideoPage sizes={sizes} />
     </Layout>
   )
 }
