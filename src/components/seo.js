@@ -12,6 +12,7 @@ function Seo() {
           siteMetadata {
             title
             description
+            keywords
           }
         }
       }
@@ -20,10 +21,9 @@ function Seo() {
 
   // Prepare data
   const lang = "en"
-  const { title, description } = site.siteMetadata;
+  const { title, description, keywords } = site.siteMetadata;
 
   // Construct an array of meta tags that Helmet will shove into the <head>
-
   const metaTags = [
     {
       name: `description`,
@@ -60,6 +60,10 @@ function Seo() {
     {
       name: 'twitter:image',
       content: shareImage,
+    },
+    {
+      name: 'keywords',
+      content: keywords,
     }
   ];
 

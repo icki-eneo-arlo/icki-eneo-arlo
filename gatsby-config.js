@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `Icki Eneo Arlo`,
-    description: `Description tk`,
+    description: `A US based production company founded by Robert Pattinson.`,
     siteUrl: `https://ickieneoarlo.com/`,
+    keywords: "icki,film,production,company,robert,pattinson,batman,actor,brighton,mcloskey"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
